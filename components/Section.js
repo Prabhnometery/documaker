@@ -1,11 +1,16 @@
 import Button from '@material-tailwind/react/Button';
 import Icon from '@material-tailwind/react/Icon';
+import { useSession } from 'next-auth/client';
 
 function Section() {
+  const [session] = useSession();
   return (
     <section className='bg-[#F8F9FA] pb-10 px-10'>
       <div className='max-w-3xl mx-auto'>
-        <div className='flex items-center justify-between py-6'>
+        <h2 className='py-2 text-gray-700 text-3xl'>
+          Welcome, {session.user.name.toLowerCase()}!
+        </h2>
+        <div className='flex items-center justify-between py-3'>
           <h2 className='text-gray-700 text-lg'>Create a new document</h2>
           <Button
             color='gray'
@@ -21,7 +26,7 @@ function Section() {
         </div>
 
         <div>
-          <div className='py-4'>
+          <div className='py-5'>
             <Button
               color='gray'
               buttonType='outline'
