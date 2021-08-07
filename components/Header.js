@@ -2,8 +2,11 @@ import Button from '@material-tailwind/react/Button';
 import Icon from '@material-tailwind/react/Icon';
 import { DocumentDuplicateIcon } from '@heroicons/react/outline';
 import { DocumentSearchIcon } from '@heroicons/react/solid';
+import { signOut, useSession } from 'next-auth/client';
 
 function Header() {
+  const [session] = useSession();
+
   return (
     <header className='sticky top-0 z-50 flex items-center px-4 py-2 shadow-md bg-white'>
       <Button
@@ -50,9 +53,10 @@ function Header() {
       </Button>
 
       <img
+        onClick={signOut}
         loading='lazy'
-        className='cursor-pointer h-12 w-12 rounded-full ml-2'
-        src='https://w7.pngwing.com/pngs/703/141/png-transparent-animation-black-and-white-man-cartoon-avatar-cartoon-character-white-face.png'
+        className='animate-pulse cursor-pointer border-2  border-gray-500 h-12 w-12 rounded-full ml-2'
+        src={'https://robohash.org/' + session?.user.name}
         alt=''
       />
     </header>
